@@ -6,6 +6,11 @@ from security import authenticate, identity
 from user import UserRegister
 from resouces import Item, ItemList
 
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
 app = Flask(__name__)
 app.secret_key = 'key'  # to authenticate and create token 
 api = Api(app)
@@ -26,4 +31,4 @@ api.add_resource(UserRegister, '/register')
 
 if __name__ == "__main__":
     # run app if this file is main
-    app.run(port=6060)
+    app.run(port=config['PORTS']['flask'])
